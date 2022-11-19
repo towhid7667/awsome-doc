@@ -3,7 +3,7 @@ import img from '../../assets/images/treatment.png'
 
 const Hero2 = () => {
     return (
-        <div className=" mt-8 hero bg-base-200 p-10 rounded-lg">
+        <div className=" mt-8 hero  p-10 rounded-lg">
         <div className="hero-content flex-col lg:flex-row">
           <img alt='' src={img} className="lg:w-4/12 rounded-lg shadow-2xl" />
           <div className='lg:w-5/12 lg:mx-4 text-center lg:text-start md:text-start'>
