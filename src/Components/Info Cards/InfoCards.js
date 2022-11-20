@@ -20,7 +20,7 @@ const InfoCards = () => {
             name: 'Our Locations',
             description: 'Open 9.00 am to 5.00pm everyday',
             icon: marker,
-            bgClass: 'bg-accent'
+            bgClass: 'bg-gradient-to-r from-accent to-black'
         },
         {
             id: 3,

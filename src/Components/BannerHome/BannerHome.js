@@ -7,7 +7,7 @@ const BannerHome = () => {
 
 
     return (
-        <div className="myhero hero p-10 relative">
+        <div className="myhero hero p-10 relative my-1">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img alt='' src={bannerImg} className="rounded-lg w-full lg:w-1/2 md:w-3/4 shadow-2xl" />
           <div>
