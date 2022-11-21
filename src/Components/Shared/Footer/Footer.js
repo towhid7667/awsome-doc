@@ -2,7 +2,7 @@ import React from 'react';
 import footerphoto from '../../../assets/images/footer.png'
 const Footer = () => {
     return (
-        <footer className="footer p-10 my-10 flex justify-around" style={{background : `url(${footerphoto})`, backgroundSize: 'cover'}}>
+        <footer className="footer p-10 mt-10 flex justify-around rounded-lg font-bold" style={{background : `url(${footerphoto})`, backgroundSize: 'contain'}}>
         <div>
           <span className="footer-title">Services</span> 
           <a className="link link-hover">Branding</a>
