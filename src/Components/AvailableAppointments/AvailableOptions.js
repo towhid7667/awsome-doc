@@ -12,7 +12,7 @@ const AvailableOptions = ({availableOption, setTreatment}) => {
           <p>{slots.length > 0 ? slots[0] : "Try Another Day"}</p>
           <p>{slots.length} {slots.length > 1 ? 'spaces' : "space"} Available</p>
           <div className="card-actions justify-center mt-5">
-          <label onClick={()=> setTreatment(availableOption)} htmlFor="booking-modal" className="btn btn-primary bg-gradient-to-r from-primary to-secondary  hover:from-secondary hover:to-primary text-white">open modal</label>
+          <label disabled = {slots.length === 0} onClick={()=> setTreatment(availableOption)} htmlFor="booking-modal" className="btn btn-primary bg-gradient-to-r from-primary to-secondary  hover:from-secondary hover:to-primary text-white">open modal</label>
           </div>
         </div>
       </div>
