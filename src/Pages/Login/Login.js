@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -24,16 +23,19 @@ const Login = () => {
            {errors.email && <p className="text-red-600">{errors.email?.message}</p>}
 
            <label className="label"><span className="label-text">Password</span></label>
-          <input type='password' {...register("password", { required: "Password is required",minLength : {value : 6, message: 'Password must be 6 character or more'} })} 
+          <input type='password' {...register("password", { 
+            required: "Password is required",
+            minLength : {value : 6, message: 'Password must be 6 character or more'},
+          })} 
              placeholder="password" className="input input-bordered w-full"/>
               {errors.password && <p className="text-red-600">{errors.password?.message}</p>}
-          <label className="label hover:text-blue-500"><span className="label-text  font-semibold"><Link>Forgot Password?</Link></span></label>
+          <label className="label"><Link><span className="label-text hover:text-blue-500 font-semibold">Forgot Password?</span></Link></label>
          
 
           {/* <p>{data}</p> */}
-          <input type="submit" value='SUBMIT' className="input input-bordered w-full bg-accent text-white font-bold mt-3 hover:bg-slate-800"/>
+          <input type="submit" value='LOGIN' className="input input-bordered w-full bg-accent text-white font-bold mt-3 hover:bg-slate-800"/>
         </form>
-        <p className="text-center text-1xl">Don't Have Account? <Link><span className="font-semibold text-primary">Create an account</span></Link></p>
+        <p className="text-center text-1xl">Don't Have Account? <Link to='/signup'><span className="font-semibold text-primary hover:text-secondary">Create an account</span></Link></p>
         <div className="divider">OR</div>
         <button className="btn btn-outline w-full">SIGN IN WITH GOOGLE</button>
       </div>
