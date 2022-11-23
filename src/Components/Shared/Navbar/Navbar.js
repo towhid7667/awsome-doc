@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from './../../../Context/AuthProvider';
 
 const Navbar = () => {
+  const {user} = useContext(AuthContext)
 
     const menuItem = <>
     <li><Link to='/'>Home</Link></li>
@@ -9,7 +11,12 @@ const Navbar = () => {
     <li><Link to='/appointment'>Appointment</Link></li>
     <li><Link to='/reviews'>Reviews</Link></li>
     <li><Link to='/contactus'>Contact Us</Link></li>
-    <li><Link to='/login'>Login</Link></li>
+    {
+      user?.uid?  <li><Link>Log Out</Link></li>
+      :
+                  <li><Link to='/login'>Login</Link></li>
+    }
+    
     </>
   return (
     <div className="navbar bg-base-100 flex justify-between font-bold">

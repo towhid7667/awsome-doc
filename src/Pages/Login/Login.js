@@ -1,15 +1,24 @@
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from './../../Context/AuthProvider';
 
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
+  const {signIn} = useContext(AuthContext);
+  const [loginError, setLoginError] = useState('')
 
   const handleLogin = data => {
-    console.log(data)
+    signIn(data.email, data.password)
+    .then(result =>{
+      const user = result.user;
+      console.log(user)
+    })
+    .catch(error => setLoginError(error.message))
   }
 
   return (
-    <div className="flex h-[500px] lg:w-3/12 w-10/12 md:w-5/12 mx-auto my-20 shadow-xl p-10 justify-center items-center rounded-xl">
+    <div className="flex h-[600px] lg:w-3/12 w-10/12 md:w-5/12 mx-auto my-20 shadow-xl p-10 justify-center items-center rounded-xl">
       <div className="w-full">
         <h2 className="text-xl font-bold uppercase text-center">Login</h2>
         <form onSubmit={handleSubmit(handleLogin)}>
@@ -35,6 +44,11 @@ const Login = () => {
           {/* <p>{data}</p> */}
           <input type="submit" value='LOGIN' className="input input-bordered w-full bg-accent text-white font-bold mt-3 hover:bg-slate-800"/>
         </form>
+        <div>
+          {
+            loginError && <p className="text-center text-red-500">{loginError}</p>
+          }
+        </div>
         <p className="text-center text-1xl">Don't Have Account? <Link to='/signup'><span className="font-semibold text-primary hover:text-secondary">Create an account</span></Link></p>
         <div className="divider">OR</div>
         <button className="btn btn-outline w-full">SIGN IN WITH GOOGLE</button>
