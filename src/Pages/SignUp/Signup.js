@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from './../../Context/AuthProvider';
 
@@ -7,15 +8,23 @@ const Signup = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const {createUser} = useContext(AuthContext)
+    const {createUser, updateUser} = useContext(AuthContext)
+    const [signUperror, setSignUpError] = useState('')
 
     const handleSignUp = data => {
+      setSignUpError('')
         createUser(data.email, data.password)
         .then(result => {
             const user = result.user;
-            console.log(user)
+            toast('user created successfully')
+            const userInfo = {
+              displayName : data.name
+            }
+            updateUser(userInfo)
+            .then(()=>{})
+            .catch(error => console.error(error))
         })
-        .catch(error => console.error(error))
+        .catch(error => setSignUpError(error.message))
     }
 
 
@@ -54,6 +63,7 @@ const Signup = () => {
   
           <input type="submit" value='SIGNUP' className="input input-bordered w-full bg-accent text-white font-bold mt-3 hover:bg-slate-800"/>
         </form>
+        {signUperror && <p className='text-red-600'>{signUperror}</p>}
         <p className="text-center text-1xl">Have Account? <Link to='/login'><span className="font-semibold text-primary">Please Log in</span></Link></p>
         <div className="divider">OR</div>
         <button className="btn btn-outline w-full">SIGN IN WITH GOOGLE</button>
