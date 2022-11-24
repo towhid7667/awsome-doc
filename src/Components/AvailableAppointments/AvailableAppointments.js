@@ -8,7 +8,7 @@ const AvailableAppointments = ({selectedDate}) => {
     const [treatment, setTreatment] = useState(null);
 
     useEffect(() => {
-        fetch('appointmentOptions.json')
+        fetch('https://awsome-doctor-server-towhid7667.vercel.app/appointmentOptions')
         .then(res => res.json())
         .then(data => setAvailableOptions(data))
     }, [])

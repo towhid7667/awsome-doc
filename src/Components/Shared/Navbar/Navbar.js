@@ -20,7 +20,7 @@ const Navbar = () => {
     {
       user?.uid? <>
       <li><Link to='/dashboard'>DashBoard</Link></li>
-      <li><button onClick={handleLogOut} className="btn btn-ghost font-bold">Log Out</button></li>
+      <li><button onClick={handleLogOut} className="btn btn-ghost font-bold capitalize">Log Out</button></li>
       </> 
       :
                   <li><Link to='/login'>Login</Link></li>
