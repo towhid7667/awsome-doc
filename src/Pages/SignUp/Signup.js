@@ -24,13 +24,41 @@ const Signup = () => {
             }
             updateUser(userInfo)
             .then(()=>{
-              navigate('/');
+              saveUser(data.email, data.name)
             })
             .catch(error => console.error(error))
         })
         .catch(error => setSignUpError(error.message))
     }
 
+    const saveUser = (email, name) => {
+      const user = {email, name};
+      fetch('https://awsome-doctor-server-towhid7667.vercel.app/users', {
+        method : 'POST',
+        headers:{
+          'content-type' : 'application/json'
+        },
+
+        body: JSON.stringify(user)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        getUserToken(email)
+        
+      })
+    }
+
+    const getUserToken = email => {
+      fetch(`https://awsome-doctor-server-towhid7667.vercel.app/jwt?email=${email}`)
+      .then(res => res.json())
+      .then(data =>{
+        if(data.accessToken){
+          localStorage.setItem('accessToken', data.accessToken);
+          navigate('/');
+        }
+      })
+    }
 
     return (
         <div className="flex h-[600px] lg:w-3/12 w-10/12 md:w-5/12 mx-auto my-20 shadow-xl p-10 justify-center items-center rounded-xl">
