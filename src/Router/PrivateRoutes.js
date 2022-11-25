@@ -1,6 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import Loading from '../Components/Shared/Loading';
 import { AuthContext } from './../Context/AuthProvider';
 
 const PrivateRoutes = ({children}) => {
@@ -9,9 +10,7 @@ const PrivateRoutes = ({children}) => {
     const location = useLocation();
 
     if(loading){
-        return <div className='flex justify-center items-center h-full'>
-            <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""></img>
-        </div>
+        return <Loading></Loading>
     }
     if(user){
         return children;
