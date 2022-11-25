@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import AvailableOptions from './AvailableOptions';
 import BookingModal from '../BookingModal/BookingModal';
+import { useQuery } from '@tanstack/react-query';
 
 const AvailableAppointments = ({selectedDate}) => {
-    const [availableOptions, setAvailableOptions] = useState([]);
+    // const [availableOptions, setAvailableOptions] = useState([]);
     const [treatment, setTreatment] = useState(null);
 
-    useEffect(() => {
-        fetch('https://awsome-doctor-server-towhid7667.vercel.app/appointmentOptions')
+    const {data : availableOptions = []} = useQuery({
+        queryKey : ['availableOptions'],
+        queryFn : () => fetch('https://awsome-doctor-server-towhid7667.vercel.app/appointmentOptions')
         .then(res => res.json())
-        .then(data => setAvailableOptions(data))
-    }, [])
+    })
+
+    // useEffect(() => {
+    //     fetch('https://awsome-doctor-server-towhid7667.vercel.app/appointmentOptions')
+    //     .then(res => res.json())
+    //     .then(data => setAvailableOptions(data))
+    // }, [])
     return (
         <section className='my-16'>
             <p className='text-secondary text-center font-bold'>Selected date: {format(selectedDate, 'PP')}</p>

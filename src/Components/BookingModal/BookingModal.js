@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { format } from 'date-fns';
+import { AuthContext } from './../../Context/AuthProvider';
 
 const BookingModal = ({treatment, selectedDate, setTreatment}) => {
     const {name, slots} = treatment;
     const date = format(selectedDate, 'PP')
+    const {user} = useContext(AuthContext);
 
 
     const handleBooking = event => {
@@ -33,8 +35,8 @@ const BookingModal = ({treatment, selectedDate, setTreatment}) => {
         slots.map(slot => <option key={slot} value={slot}>{slot}</option>)
     }
     </select>
-    <input name='name' type="text" placeholder="Your Name" className="input input-bordered w-full mt-3" />
-    <input name='email' type="email" placeholder="email" className="input input-bordered w-full mt-3 " />
+    <input name='name' type="text" defaultValue={user?.displayName} disabled placeholder="Your Name" className="input input-bordered w-full mt-3" />
+    <input name='email' type="email" defaultValue={user?.email} disabled placeholder="email" className="input input-bordered w-full mt-3 " />
     <input name='phoneNo' type='number' placeholder="Phone No" className="input input-bordered w-full mt-3" />
     <input type="submit" value='Submit' className="input input-bordered w-full bg-accent text-white font-bold mt-3 hover:bg-slate-800" />
     </form>
