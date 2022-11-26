@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from './../../Context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import useToken from './../../Hooks/useToken';
 
 const Signup = () => {
 
@@ -11,7 +12,15 @@ const Signup = () => {
 
     const {createUser, updateUser} = useContext(AuthContext)
     const [signUperror, setSignUpError] = useState('')
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail)
     const navigate = useNavigate();
+
+
+    if(token){
+      navigate('/')
+      
+    }
 
     const handleSignUp = data => {
       setSignUpError('')
@@ -44,21 +53,12 @@ const Signup = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        getUserToken(email)
+        setCreatedUserEmail(email);
         
       })
     }
 
-    const getUserToken = email => {
-      fetch(`https://awsome-doctor-server-towhid7667.vercel.app/jwt?email=${email}`)
-      .then(res => res.json())
-      .then(data =>{
-        if(data.accessToken){
-          localStorage.setItem('accessToken', data.accessToken);
-          navigate('/');
-        }
-      })
-    }
+
 
     return (
         <div className="flex h-[600px] lg:w-3/12 w-10/12 md:w-5/12 mx-auto my-20 shadow-xl p-10 justify-center items-center rounded-xl">
