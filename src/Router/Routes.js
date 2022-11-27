@@ -11,11 +11,14 @@ import AdminRoute from "./AdminRoute";
 import PrivateRoutes from './PrivateRoutes';
 import AddDoctor from './../Components/AddDoctor/AddDoctor';
 import ManageDoctors from './../Components/ManageDoctors/ManageDoctors';
+import MakePayment from './../Components/MakePayment/MakePayment';
+import DisplayError from "../Components/Shared/DisplayError/DisplayError";
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <DisplayError></DisplayError>,
         children: [
 
             {
@@ -39,6 +42,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element:<PrivateRoutes><DashBoardLayout></DashBoardLayout></PrivateRoutes>,
+        errorElement: <DisplayError></DisplayError>,
         children : [
             {
                 path : '/dashboard',
@@ -55,6 +59,11 @@ export const router = createBrowserRouter([
             {
                 path : '/dashboard/manageDoctors',
                 element : <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
+            },
+            {
+                path : '/dashboard/payment/:id',
+                element : <PrivateRoutes><MakePayment></MakePayment></PrivateRoutes>,
+                loader: ({params}) => fetch(`https://awsome-doctor-server-towhid7667.vercel.app/bookings/${params.id}`)
             },
 
         ]

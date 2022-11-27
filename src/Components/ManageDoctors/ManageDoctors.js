@@ -12,6 +12,25 @@ const ManageDoctors = () => {
         setDeletingDoctor(null);
     }
 
+    const { data: doctors, isLoading, refetch } = useQuery({
+        queryKey: ['doctors'],
+        queryFn: async () => {
+            try {
+                const res = await fetch('https://awsome-doctor-server-towhid7667.vercel.app/awsomeDoctors', {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
+                const data = await res.json();
+                return data;
+            }
+            catch (error) {
+                console.log(error)
+
+            }
+        }
+    });
+
     const handleDeleteDoctor = doctor =>{
         fetch(`https://awsome-doctor-server-towhid7667.vercel.app/awsomeDoctors/${doctor._id}`, {
             method: 'DELETE', 
@@ -29,24 +48,6 @@ const ManageDoctors = () => {
 
     }
     
-
-    const { data: doctors, isLoading, refetch } = useQuery({
-        queryKey: ['doctors'],
-        queryFn: async () => {
-            try {
-                const res = await fetch('https://awsome-doctor-server-towhid7667.vercel.app/awsomeDoctors', {
-                    headers: {
-                        authorization: `bearer ${localStorage.getItem('accessToken')}`
-                    }
-                });
-                const data = await res.json();
-                return data;
-            }
-            catch (error) {
-
-            }
-        }
-    });
 
     if(isLoading){
         return <Loading></Loading>
@@ -68,7 +69,7 @@ const ManageDoctors = () => {
                     </thead>
                     <tbody>
                         {
-                            doctors.map((doctor, i) => <tr key={doctor._id}>
+                            doctors?.map((doctor, i) => <tr key={doctor._id}>
                                 <th>{i + 1}</th>
                                 <td><div className="avatar">
                                     <div className="w-24 rounded-full">

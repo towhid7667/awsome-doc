@@ -13,10 +13,7 @@ const Navbar = () => {
 
     const menuItem = <>
     <li><Link to='/'>Home</Link></li>
-    <li><Link to='/about'>About</Link></li>
     <li><Link to='/appointment'>Appointment</Link></li>
-    <li><Link to='/reviews'>Reviews</Link></li>
-    <li><Link to='/contactus'>Contact Us</Link></li>
     {
       user?.uid? <>
       <li><Link to='/dashboard'>DashBoard</Link></li>
@@ -28,7 +25,7 @@ const Navbar = () => {
     
     </>
   return (
-    <div className="navbar bg-base-100 flex justify-between font-semibold">
+    <div className="navbar bg-base-100 flex lg:justify-around md:justify-around justify-between     font-semibold">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
