@@ -7,7 +7,9 @@ import DashBoard from "../Pages/Dashboard/DashBoard";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/SignUp/Signup";
+import AdminRoute from "./AdminRoute";
 import PrivateRoutes from './PrivateRoutes';
+import AddDoctor from './../Components/AddDoctor/AddDoctor';
 
 export const router = createBrowserRouter([
     {
@@ -43,8 +45,13 @@ export const router = createBrowserRouter([
             },
             {
                 path : '/dashboard/allusers',
-                element : <AllUsers></AllUsers>
-            }
+                element : <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
+            {
+                path : '/dashboard/adddoctors',
+                element : <AdminRoute><AddDoctor></AddDoctor></AdminRoute>
+            },
+
         ]
 
     }
