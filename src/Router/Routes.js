@@ -10,6 +10,7 @@ import Signup from "../Pages/SignUp/Signup";
 import AdminRoute from "./AdminRoute";
 import PrivateRoutes from './PrivateRoutes';
 import AddDoctor from './../Components/AddDoctor/AddDoctor';
+import ManageDoctors from './../Components/ManageDoctors/ManageDoctors';
 
 export const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
             {
                 path : '/dashboard/adddoctors',
                 element : <AdminRoute><AddDoctor></AddDoctor></AdminRoute>
+            },
+            {
+                path : '/dashboard/manageDoctors',
+                element : <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
             },
 
         ]
